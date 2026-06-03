@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.courseworkitfu.fxControllers.MainForm">
+    <children>
+        <TabPane layoutX="3.0" layoutY="2.0" prefHeight="394.0" prefWidth="593.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="userTab" onSelectionChanged="#loadData" text="User Management">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="320.0">
+                            <children>
+                                <ListView fx:id="userList" layoutX="14.0" layoutY="162.0" prefHeight="189.0" prefWidth="214.0">
+                                    <contextMenu>
+                                        <ContextMenu>
+                                            <items>
+                                                <MenuItem mnemonicParsing="false" onAction="#loadRegForm" text="Create" />
+                                                <MenuItem mnemonicParsing="false" onAction="#loadRegForm" text="Update" />
+                                                <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
+                                            </items>
+                                        </ContextMenu>
+                                    </contextMenu></ListView>
+                                <TableView fx:id="usersTable" layoutX="14.0" layoutY="14.0" prefHeight="130.0" prefWidth="572.0">
+                                    <columns>
+                                        <TableColumn fx:id="idColumn" prefWidth="60.0" text="id" />
+                                        <TableColumn fx:id="usernameColumn" prefWidth="110.0" text="username" />
+                                        <TableColumn fx:id="passwordColumn" prefWidth="110.0" text="password" />
+                                        <TableColumn fx:id="emailColumn" prefWidth="150.0" text="email" />
+                                        <TableColumn fx:id="dateCreatedColumn" prefWidth="140.0" text="dateCreated" />
+                                        <TableColumn fx:id="adminColumn" prefWidth="75.0" text="isAdmin" />
+                                        <TableColumn fx:id="activeColumn" prefWidth="75.0" text="isActive" />
+                                        <TableColumn fx:id="phoneNumColumn" prefWidth="110.0" text="phoneNum" />
+                                        <TableColumn fx:id="nameColumn" prefWidth="100.0" text="name" />
+                                        <TableColumn fx:id="surnameColumn" prefWidth="100.0" text="surname" />
+                                        <TableColumn fx:id="cardNoColumn" prefWidth="120.0" text="cardNo" />
+                                        <TableColumn fx:id="bonusPointsColumn" prefWidth="100.0" text="bonusPoints" />
+                                        <TableColumn fx:id="clientAddressColumn" prefWidth="160.0" text="clientAddress" />
+                                        <TableColumn fx:id="dateOfBirthColumn" prefWidth="120.0" text="dateOfBirth" />
+                                        <TableColumn fx:id="balanceColumn" prefWidth="100.0" text="balance" />
+                                        <TableColumn fx:id="driverLicenceColumn" prefWidth="130.0" text="driverLicence" />
+                                        <TableColumn fx:id="vehicleTypeColumn" prefWidth="120.0" text="vehicleType" />
+                                        <TableColumn fx:id="birthDateColumn" prefWidth="110.0" text="birthDate" />
+                                        <TableColumn fx:id="availableColumn" prefWidth="85.0" text="isAvailable" />
+                                        <TableColumn fx:id="driverRatingColumn" prefWidth="100.0" text="driverRating" />
+                                        <TableColumn fx:id="totalDeliveriesColumn" prefWidth="120.0" text="totalDeliveries" />
+                                        <TableColumn fx:id="vehiclePlateNumberColumn" prefWidth="150.0" text="vehiclePlateNumber" />
+                                        <TableColumn fx:id="descriptionColumn" prefWidth="160.0" text="description" />
+                                        <TableColumn fx:id="restaurantAddressColumn" prefWidth="160.0" text="restaurantAddress" />
+                                        <TableColumn fx:id="happyHoursColumn" prefWidth="140.0" text="happyHours" />
+                                        <TableColumn fx:id="cuisineTypeColumn" prefWidth="120.0" text="cuisineType" />
+                                        <TableColumn fx:id="restaurantRatingColumn" prefWidth="110.0" text="restaurantRating" />
+                                        <TableColumn fx:id="openColumn" prefWidth="85.0" text="isOpen" />
+                                        <TableColumn fx:id="openingTimeColumn" prefWidth="110.0" text="openingTime" />
+                                        <TableColumn fx:id="closingTimeColumn" prefWidth="110.0" text="closingTime" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="256.0" layoutY="327.0" mnemonicParsing="false" onAction="#loadRegForm" text="Create new User" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="ordersTab" onSelectionChanged="#loadData" text="Order Management">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="320.0" />
+                    </content>
+                </Tab>
+                <Tab fx:id="statisticsTab" text="Statistics">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="333.0" prefWidth="320.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

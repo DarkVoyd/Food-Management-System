@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Management Base — Web Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-header">
+            <h1 class="gradient-text">Food<span style="font-weight: 300;">Management</span></h1>
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="users">Users</button>
+                <button class="tab-btn" data-tab="menu">Menu</button>
+                <button class="tab-btn" data-tab="orders">Orders</button>
+                <button class="tab-btn" data-tab="messages">Communications</button>
+            </nav>
+        </header>
+
+        <main class="content-area">
+            <!-- USERS TAB -->
+            <section id="users-tab" class="tab-content active">
+                <div class="panel glass-panel">
+                    <div class="panel-header">
+                        <h2>User Directory</h2>
+                        <div class="filter-group">
+                            <label>Filter:</label>
+                            <select id="userTypeFilter">
+                                <option value="">All Types</option>
+                                <option value="Customer">Customer</option>
+                                <option value="Driver">Driver</option>
+                                <option value="Restaurant">Restaurant</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Type</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel glass-panel form-panel">
+                    <h2 id="userFormTitle">Onboard / Edit User</h2>
+                    <form id="userForm">
+                        <input type="hidden" id="userId">
+                        <div class="form-grid">
+                            <div class="field-box">
+                                <label>User Type</label>
+                                <select id="userType" required>
+                                    <option value="Customer">Customer</option>
+                                    <option value="Driver">Driver</option>
+                                    <option value="Restaurant">Restaurant</option>
+                                </select>
+                            </div>
+                            <div class="field-box"><label>Username</label><input type="text" id="username" required></div>
+                            <div class="field-box"><label>Password</label><input type="password" id="password" required></div>
+                            <div class="field-box"><label>Email</label><input type="email" id="email"></div>
+                            <div class="field-box"><label>Phone</label><input type="text" id="phoneNum"></div>
+                            
+                            <!-- Dynamic fields based on type -->
+                            <div class="field-box type-customer type-driver"><label>Name</label><input type="text" id="firstName"></div>
+                            <div class="field-box type-customer type-driver"><label>Surname</label><input type="text" id="lastName"></div>
+                            <div class="field-box type-customer type-restaurant"><label>Address</label><input type="text" id="address"></div>
+                            <div class="field-box type-customer"><label>Card No</label><input type="text" id="cardNo"></div>
+                            <div class="field-box type-driver"><label>License</label><input type="text" id="license"></div>
+                            <div class="field-box type-restaurant"><label>Description</label><input type="text" id="description"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="accent-btn">Save User</button>
+                            <button type="button" class="secondary-btn" onclick="resetUserForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- MENU TAB -->
+            <section id="menu-tab" class="tab-content">
+                <div class="panel glass-panel">
+                    <h2>Restaurant Menu</h2>
+                    <div class="table-wrapper">
+                        <table id="dishesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>Restaurant</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="panel glass-panel form-panel">
+                    <h2 id="dishFormTitle">Add / Edit Dish</h2>
+                    <form id="dishForm">
+                        <input type="hidden" id="dishId">
+                        <div class="form-grid">
+                            <div class="field-box"><label>Title</label><input type="text" id="dishTitle" required></div>
+                            <div class="field-box"><label>Price ($)</label><input type="number" id="dishPrice" step="0.01" required></div>
+                            <div class="field-box">
+                                <label>Category</label>
+                                <select id="dishCategory">
+                                    <option value="APPETIZER">Appetizer</option>
+                                    <option value="MAIN_COURSE">Main Course</option>
+                                    <option value="DESSERT">Dessert</option>
+                                    <option value="DRINK">Drink</option>
+                                    <option value="SALAD">Salad</option>
+                                    <option value="SOUP">Soup</option>
+                                </select>
+                            </div>
+                            <div class="field-box">
+                                <label>Restaurant</label>
+                                <select id="dishRestaurant" required></select>
+                            </div>
+                            <div class="field-box"><label>Prep Time (min)</label><input type="number" id="prepTime"></div>
+                            <div class="field-box"><label>Calories</label><input type="number" id="calories"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="accent-btn">Save Dish</button>
+                            <button type="button" class="secondary-btn" onclick="resetDishForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ORDERS TAB -->
+            <section id="orders-tab" class="tab-content">
+                <div class="panel glass-panel">
+                    <div class="panel-header">
+                        <h2>Active Orders</h2>
+                        <div class="filter-group">
+                            <label>Status:</label>
+                            <select id="orderStatusFilter">
+                                <option value="">All</option>
+                                <option value="PENDING">Pending</option>
+                                <option value="CONFIRMED">Confirmed</option>
+                                <option value="PREPARING">Preparing</option>
+                                <option value="READY_FOR_PICKUP">Ready</option>
+                                <option value="IN_DELIVERY">In Delivery</option>
+                                <option value="DELIVERED">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="ordersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Restaurant</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel glass-panel form-panel">
+                    <h2 id="orderFormTitle">Create / Edit Order</h2>
+                    <form id="orderForm">
+                        <input type="hidden" id="orderId">
+                        <div class="form-grid">
+                            <div class="field-box"><label>Customer</label><select id="orderCustomer" required></select></div>
+                            <div class="field-box"><label>Restaurant</label><select id="orderRestaurant" required></select></div>
+                            <div class="field-box"><label>Driver</label><select id="orderDriver"></select></div>
+                            <div class="field-box">
+                                <label>Status</label>
+                                <select id="orderStatus" required>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="CONFIRMED">Confirmed</option>
+                                    <option value="PREPARING">Preparing</option>
+                                    <option value="READY_FOR_PICKUP">Ready</option>
+                                    <option value="IN_DELIVERY">In Delivery</option>
+                                    <option value="DELIVERED">Delivered</option>
+                                </select>
+                            </div>
+                            <div class="field-box"><label>Total Price ($)</label><input type="number" id="orderTotal" step="0.01"></div>
+                            <div class="field-box"><label>Special Instructions</label><input type="text" id="orderInstructions"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="accent-btn">Save Order</button>
+                            <button type="button" class="secondary-btn" onclick="resetOrderForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- MESSAGES TAB -->
+            <section id="messages-tab" class="tab-content">
+                <div class="panel glass-panel">
+                    <h2>Message Center & Reviews</h2>
+                    <div class="table-wrapper">
+                        <table id="messagesTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Content</th>
+                                    <th>Rating</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel glass-panel form-panel">
+                    <h2>Send Message / Post Review</h2>
+                    <form id="messageForm">
+                        <input type="hidden" id="messageId">
+                        <div class="form-grid">
+                            <div class="field-box">
+                                <label>Type</label>
+                                <select id="messageType">
+                                    <option value="Message">Standard Message</option>
+                                    <option value="Review">Restaurant/Driver Review</option>
+                                </select>
+                            </div>
+                            <div class="field-box"><label>Sender</label><select id="msgSender" required></select></div>
+                            <div class="field-box"><label>Receiver</label><select id="msgReceiver" required></select></div>
+                            <div class="field-box"><label>Related Order</label><select id="msgOrder"></select></div>
+                            <div class="field-box full-width"><label>Content</label><textarea id="msgContent" required></textarea></div>
+                            
+                            <div class="field-box type-review"><label>Review Title</label><input type="text" id="reviewTitle"></div>
+                            <div class="field-box type-review"><label>Rating (1-5)</label><input type="number" id="reviewRating" min="1" max="5"></div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="accent-btn">Submit</button>
+                            <button type="button" class="secondary-btn" onclick="resetMessageForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

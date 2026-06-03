@@ -1,0 +1,5 @@
+package com.example.lab3.model;
+
+public enum Cuisine {
+    ITALIAN, CHINESE, JAPANESE, MEXICAN, INDIAN, AMERICAN, FRENCH, THAI, KOREAN, MEDITERRANEAN, LITHUANIAN
+}
